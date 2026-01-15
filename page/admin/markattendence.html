@@ -1,82 +1,81 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+  <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <title>Mark Attendance</title>
 
     <link rel="stylesheet" href="/css/markattendance.css" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/framework7@7/framework7-bundle.min.css" />
-    <link rel="stylesheet" href="/css/nav.css"/>
-</head>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/framework7@7/framework7-bundle.min.css"
+    />
+    <link rel="stylesheet" href="/css/nav.css" />
+  </head>
 
-<body>
-
-<div class="page">
-    <div class="page-content">
-
+  <body>
+    <div class="page">
+      <div class="page-content">
         <!-- TOP BLUE HEADER -->
         <div class="top-header"></div>
 
         <!-- WHITE HEADER BAR -->
         <div class="nav-bar">
-            <div class="menu-icon" onclick="history.back()">☰</div>
-            <h2>Mark Attendance</h2>
-            <img src="/image.design/element/profile.png" class="profile">
+          <div class="menu-icon" onclick="history.back()">☰</div>
+          <h2>Mark Attendance</h2>
+          <img src="/image.design/element/profile.png" class="profile" />
         </div>
 
         <!-- SUBJECT SELECTION -->
         <div class="form-box">
-            <label>Select Subject</label>
-            <select id="subjectSelect" onchange="loadStudents()">
-                <option value="">Loading...</option>
-            </select>
+          <label>Select Subject</label>
+          <select id="subjectSelect" onchange="loadStudents()">
+            <option value="">Loading...</option>
+          </select>
         </div>
 
         <!-- STUDENT LIST -->
         <div class="student-list" id="studentList">
-            <p class="loading">Please select a subject...</p>
+          <p class="loading">Please select a subject...</p>
         </div>
 
         <!-- SUBMIT BUTTON -->
         <button class="submit-btn" onclick="submitAttendance()">Submit</button>
-
+      </div>
     </div>
-</div>
-<div class="footer-nav">
-    <div class="nav-item" onclick="goHome()">
-         
-        <img src="/image.design/element/pngwing.com (2).png">
-        
+    <div class="footer-nav">
+      <div class="nav-item" onclick="goHome()">
+        <img src="/image.design/element/pngwing.com (2).png" />
+
         <span>Home</span>
-    </div>
+      </div>
 
-    <div class="nav-item" onclick="goAdminSchedule()">
-         
-        <img src="/image.design/element/1 (1).png">
-       
+      <div class="nav-item" onclick="goAdminSchedule()">
+        <img src="/image.design/element/1 (1).png" />
+
         <span>Schedule</span>
-    </div>
+      </div>
 
-    <div class="nav-item" onclick="goMarkAttendance()">
-        <img src="/image.design/element/profile check.png">
- 
+      <div class="nav-item" onclick="goMarkAttendance()">
+        <img src="/image.design/element/profile check.png" />
+
         <span>Attendance</span>
-    </div>
+      </div>
 
-    <div class="nav-item" onclick="goInquiry()">
-        <img src="/image.design/element/3png.png">
-        
+      <div class="nav-item" onclick="goInquiry()">
+        <img src="/image.design/element/3png.png" />
+
         <span>Inquiry</span>
-    </div>
+      </div>
 
-    <div class="nav-item" onclick="goCalendar()">
-        <img src="/image.design/element/2 (1).png">
+      <div class="nav-item" onclick="goCalendar()">
+        <img src="/image.design/element/2 (1).png" />
         <span>Calendar</span>
+      </div>
     </div>
-</div>
 
-<script src ="/js/markattendance.js"></script>
-</body>
+    <script src="/js/config.js"></script>
+    <script src="/js/markattendance.js"></script>
+  </body>
 </html>

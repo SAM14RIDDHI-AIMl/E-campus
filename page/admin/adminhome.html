@@ -1,61 +1,60 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Home Screen</title>
-    <link rel="stylesheet" href="/css/home.css">
-</head>
-<body>
+    <link rel="stylesheet" href="/css/home.css" />
+  </head>
+  <body>
+    <!-- TOP BLUE HEADER -->
+    <div class="top-header"></div>
 
-<!-- TOP BLUE HEADER -->
-<div class="top-header"></div>
-
-<!-- WHITE HEADER BAR -->
-<div class="nav-bar">
-    <div class="menu-icon">☰</div>
-    <h2>BGI E-CAMPUS</h2>
-    <img src="/image.design/element/profile.png" class="profile">
-</div>
-
-<!-- BUTTON 1 : CLASS SCHEDULE -->
-<div class="main-btn" onclick="goClassSchedule()">
-    <img src="/image.design/element/4.png" class="icon">
-    <span>Classes Schedule</span>
-</div>
-
-<!-- BUTTON 2 : MARK ATTENDANCE -->
-<div class="main-btn" onclick="goMarkAttendance()">
-    <img src="/image.design/element/5 (1).png" class="icon">
-    <span>Mark Attendance</span>
-</div>
-
-<!-- 3 ICON FEATURES -->
-<div class="feature-box">
-    <div class="feature" onclick=" goteacherattendence ()">
-        <img src="/image.design/element/1 (1).png">
+    <!-- WHITE HEADER BAR -->
+    <div class="nav-bar">
+      <div class="menu-icon">☰</div>
+      <h2>BGI E-CAMPUS</h2>
+      <img src="/image.design/element/profile.png" class="profile" />
     </div>
 
-    <div class="feature" onclick="goCalendar()">
-        <img src="/image.design/element/2 (1).png">
+    <!-- BUTTON 1 : CLASS SCHEDULE -->
+    <div class="main-btn" onclick="goClassSchedule()">
+      <img src="/image.design/element/4.png" class="icon" />
+      <span>Classes Schedule</span>
     </div>
 
-    <div class="feature" onclick="goInquiry()">
-        <img src="/image.design/element/3png.png">
+    <!-- BUTTON 2 : MARK ATTENDANCE -->
+    <div class="main-btn" onclick="goMarkAttendance()">
+      <img src="/image.design/element/5 (1).png" class="icon" />
+      <span>Mark Attendance</span>
     </div>
-</div>
 
-<!-- TWO BOX SECTION -->
-<div class="double-box">
-    <div class="row-box"></div>
-    <div class="row-box"></div>
-</div>
+    <!-- 3 ICON FEATURES -->
+    <div class="feature-box">
+      <div class="feature" onclick=" goteacherattendence ()">
+        <img src="/image.design/element/1 (1).png" />
+      </div>
 
-<!-- BOTTOM BIG BUTTON -->
-<div class="bottom-btn" onclick="goProfile()"></div>
+      <div class="feature" onclick="goCalendar()">
+        <img src="/image.design/element/2 (1).png" />
+      </div>
 
-<!-- JS -->
-<script src="/js/navigation.js"></script>
+      <div class="feature" onclick="goInquiry()">
+        <img src="/image.design/element/3png.png" />
+      </div>
+    </div>
 
-</body>
+    <!-- TWO BOX SECTION -->
+    <div class="double-box">
+      <div class="row-box"></div>
+      <div class="row-box"></div>
+    </div>
+
+    <!-- BOTTOM BIG BUTTON -->
+    <div class="bottom-btn" onclick="goProfile()"></div>
+
+    <!-- JS -->
+    <script src="/js/config.js"></script>
+    <script src="/js/navigation.js"></script>
+  </body>
 </html>

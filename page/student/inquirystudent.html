@@ -1,78 +1,80 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Raise Inquiry</title>
 
-    <link rel="stylesheet" href="/css/nav.css">
-    <link rel="stylesheet" href="/css/inquiry.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/framework7@7/framework7-bundle.min.css">
-</head>
+    <link rel="stylesheet" href="/css/nav.css" />
+    <link rel="stylesheet" href="/css/inquiry.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/framework7@7/framework7-bundle.min.css"
+    />
+  </head>
 
-<body>
-
-<div class="page">
-    <div class="page-content">
-
+  <body>
+    <div class="page">
+      <div class="page-content">
         <!-- HEADER -->
         <div class="top-header"></div>
 
         <div class="nav-bar">
-            <div class="menu-icon" onclick="history.back()">☰</div>
-            <h2>Raise Inquiry</h2>
-            <img src="/image.design/element/profile.png" class="profile">
+          <div class="menu-icon" onclick="history.back()">☰</div>
+          <h2>Raise Inquiry</h2>
+          <img src="/image.design/element/profile.png" class="profile" />
         </div>
 
         <!-- FORM -->
         <div class="form-container">
+          <label>Subject</label>
+          <select id="inqSubject">
+            <option value="">Select Subject</option>
+          </select>
 
-            <label>Subject</label>
-            <select id="inqSubject">
-                <option value="">Select Subject</option>
-            </select>
+          <label>Date</label>
+          <input type="date" id="inqDate" />
 
-            <label>Date</label>
-            <input type="date" id="inqDate">
+          <label>Description</label>
+          <textarea
+            id="inqDesc"
+            placeholder="Describe your issue..."
+          ></textarea>
 
-            <label>Description</label>
-            <textarea id="inqDesc" placeholder="Describe your issue..."></textarea>
-
-            <button class="submit-btn" onclick="submitInquiry()">Submit</button>
-
+          <button class="submit-btn" onclick="submitInquiry()">Submit</button>
         </div>
-
+      </div>
     </div>
-</div>
 
-<!-- FOOTER NAV -->
-<div class="footer-nav">
-    <div class="nav-item" onclick="goStudentHome()">
-        <img src="/image.design/element/pngwing.com (2).png">
+    <!-- FOOTER NAV -->
+    <div class="footer-nav">
+      <div class="nav-item" onclick="goStudentHome()">
+        <img src="/image.design/element/pngwing.com (2).png" />
         <span>Home</span>
-    </div>
+      </div>
 
-    <div class="nav-item" onclick="goStudentClassSchedule()">
-        <img src="/image.design/element/1 (1).png">
+      <div class="nav-item" onclick="goStudentClassSchedule()">
+        <img src="/image.design/element/1 (1).png" />
         <span>Schedule</span>
-    </div>
+      </div>
 
-    <div class="nav-item" onclick="goStudentAttendance()">
-        <img src="/image.design/element/profile check.png">
+      <div class="nav-item" onclick="goStudentAttendance()">
+        <img src="/image.design/element/profile check.png" />
         <span>Attendance</span>
-    </div>
+      </div>
 
-    <div class="nav-item" onclick="goStudentInquiry()">
-        <img src="/image.design/element/3png.png">
+      <div class="nav-item" onclick="goStudentInquiry()">
+        <img src="/image.design/element/3png.png" />
         <span>Inquiry</span>
-    </div>
+      </div>
 
-    <div class="nav-item" onclick="goStudentCalendar()">
-        <img src="/image.design/element/2 (1).png">
+      <div class="nav-item" onclick="goStudentCalendar()">
+        <img src="/image.design/element/2 (1).png" />
         <span>Calendar</span>
+      </div>
     </div>
-</div>
 
-<script src="/js/inquirystudent.js"></script>
-</body>
+    <script src="/js/config.js"></script>
+    <script src="/js/inquirystudent.js"></script>
+  </body>
 </html>

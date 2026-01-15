@@ -1,37 +1,40 @@
-function loadUsers() {
-    return JSON.parse(localStorage.getItem("users") || "[]");
-}
-
-function saveUsers(users) {
-    localStorage.setItem("users", JSON.stringify(users));
-}
+/* ================================
+   CREATE ACCOUNT (STUDENT REGISTRATION)
+================================ */
 
 document.addEventListener("DOMContentLoaded", () => {
-    const btn = document.getElementById("ca-send");
-    if (!btn) return;
+  const btn = document.getElementById("ca-send");
+  if (!btn) return;
 
-    btn.onclick = () => {
-        const name = document.getElementById("ca-name").value.trim();
-        const phone = document.getElementById("ca-phone").value.trim();
-
-        if (!name || !phone) {
-            alert("Please fill all fields");
-            return;
-        }
-
-        const users = loadUsers();
-
-        users.push({
-            role: "student",
-            name,
-            phone
-        });
-
-        saveUsers(users);
-
-        alert("Account created successfully");
-
-        // Redirect to main login
-        window.location.href = "/page/admin/createaccount.html";
-    };
+  btn.onclick = registerStudent;
 });
+
+async function registerStudent() {
+  const username =
+    document.getElementById("ca-username")?.value.trim() ||
+    document.getElementById("ca-name")?.value.trim();
+  const password = document.getElementById("ca-password")?.value.trim();
+  const email = document.getElementById("ca-email")?.value.trim();
+  const phone = document.getElementById("ca-phone")?.value.trim();
+
+  if (!username || !password || !email || !phone) {
+    alert("Please fill all required fields");
+    return;
+  }
+
+  try {
+    const response = await apiCall("/auth/register", "POST", {
+      username: username,
+      password: password,
+      email: email,
+      phone_number: phone,
+      role: "student",
+    });
+
+    alert("Account created successfully! Please login.");
+    window.location.href = "/mainlogin.html";
+  } catch (error) {
+    console.error("Error:", error);
+    alert("Failed to create account: " + (error.message || "Please try again"));
+  }
+}

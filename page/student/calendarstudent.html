@@ -1,79 +1,79 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Student Academic Calendar</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/framework7@7/framework7-bundle.min.css">
-    <link rel="stylesheet" href="/css/calendarstudent.css">
-</head>
-<body>
-
-<div id="app">
-    <div class="view view-main">
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/framework7@7/framework7-bundle.min.css"
+    />
+    <link rel="stylesheet" href="/css/calendarstudent.css" />
+  </head>
+  <body>
+    <div id="app">
+      <div class="view view-main">
         <div class="page">
-            <div class="page-content">
-                
-                <header class="nav-bar">
-                    <div class="menu-icon">☰</div>
-                    <h2 class="title">Academic Calendar</h2>
-                    <img src="/image.design/element/profile.png" class="profile" alt="Profile">
-                </header>
+          <div class="page-content">
+            <header class="nav-bar">
+              <div class="menu-icon">☰</div>
+              <h2 class="title">Academic Calendar</h2>
+              <img
+                src="/image.design/element/profile.png"
+                class="profile"
+                alt="Profile"
+              />
+            </header>
 
-                <div class="legend-container">
-                    <div class="legend-item">
-                        <span class="dot holiday"></span> Holiday
-                    </div>
-                    <div class="legend-item">
-                        <span class="dot exam"></span> Exam
-                    </div>
-                    <div class="legend-item">
-                        <span class="dot general"></span> Event
-                    </div>
-                </div>
-
-                <p class="info-text">🗓️ Tap a date to see event details</p>
-
-                <div class="calendar-wrapper">
-                    <div id="student-calendar-container"></div>
-                </div>
-                <div class="footer-nav">
-    <div class="nav-item" onclick="goHome()">
-        <img src="/image.design/element/pngwing.com (2).png">
-        <span>Home</span>
-    </div>
-
-    <div class="nav-item" onclick="goSchedule()">
-        <img src="/image.design/element/1 (1).png">
-        <span>Schedule</span>
-    </div>
-
-    <div class="nav-item" onclick="goAttendance()">
-        <img src="/image.design/element/profile check.png">
-        <span>Attendance</span>
-    </div>
-
-    <div class="nav-item" onclick="goInquiry()">
-         <img src="/image.design/element/3png.png">
-        <span>Inquiry</span>
-    </div>
-
-    <div class="nav-item" onclick="goCalendar()">
-     
-        <img src="/image.design/element/2 (1).png">
-     
-        <span>Calendar</span>
-    </div>
-</div>
-
-              
-
+            <div class="legend-container">
+              <div class="legend-item">
+                <span class="dot holiday"></span> Holiday
+              </div>
+              <div class="legend-item"><span class="dot exam"></span> Exam</div>
+              <div class="legend-item">
+                <span class="dot general"></span> Event
+              </div>
             </div>
-        </div>
-    </div>
-</div>
 
-<script src="https://cdn.jsdelivr.net/npm/framework7@7/framework7-bundle.min.js"></script>
-<script src="/js/studentcalendar.js"></script>
-</body>
+            <p class="info-text">🗓️ Tap a date to see event details</p>
+
+            <div class="calendar-wrapper">
+              <div id="student-calendar-container"></div>
+            </div>
+            <div class="footer-nav">
+              <div class="nav-item" onclick="goHome()">
+                <img src="/image.design/element/pngwing.com (2).png" />
+                <span>Home</span>
+              </div>
+
+              <div class="nav-item" onclick="goSchedule()">
+                <img src="/image.design/element/1 (1).png" />
+                <span>Schedule</span>
+              </div>
+
+              <div class="nav-item" onclick="goAttendance()">
+                <img src="/image.design/element/profile check.png" />
+                <span>Attendance</span>
+              </div>
+
+              <div class="nav-item" onclick="goInquiry()">
+                <img src="/image.design/element/3png.png" />
+                <span>Inquiry</span>
+              </div>
+
+              <div class="nav-item" onclick="goCalendar()">
+                <img src="/image.design/element/2 (1).png" />
+
+                <span>Calendar</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/framework7@7/framework7-bundle.min.js"></script>
+    <script src="/js/config.js"></script>
+    <script src="/js/studentcalendar.js"></script>
+  </body>
 </html>

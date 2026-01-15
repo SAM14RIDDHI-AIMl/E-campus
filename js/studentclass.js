@@ -1,51 +1,59 @@
 /* ================================
    STUDENT CLASS SCHEDULE
-   Backend-ready version
 ================================ */
 
-// Backend team will replace this URL
-const STUDENT_API = "/api/student/class-schedule";
+document.addEventListener("DOMContentLoaded", async () => {
+  try {
+    // Check authentication
+    const user = getUser();
+    if (!user || user.role !== "student") {
+      window.location.href = "/mainlogin.html";
+      return;
+    }
 
-function loadStudentSchedule() {
-    const container = document.getElementById("scheduleList");
+    await loadStudentSchedule();
+  } catch (error) {
+    console.error("Error initializing:", error);
+  }
+});
 
-    // Show loading state
-    container.innerHTML = `<p class="loading-text">Loading schedule...</p>`;
+async function loadStudentSchedule() {
+  const container = document.getElementById("scheduleList");
 
-    fetch(STUDENT_API)
-        .then(res => {
-            if (!res.ok) throw new Error("API error");
-            return res.json();
-        })
-        .then(data => {
-            // Backend must send: { schedule: [] }
-            if (!data.schedule || data.schedule.length === 0) {
-                container.innerHTML = `<p>No schedule available</p>`;
-                return;
-            }
-            renderSchedule(data.schedule);
-        })
-        .catch(() => {
-            container.innerHTML =
-                `<p style="text-align:center;color:red">
-                    Failed to load schedule
-                 </p>`;
-        });
+  // Show loading state
+  container.innerHTML = `<p class="loading-text">Loading schedule...</p>`;
+
+  try {
+    const response = await apiCall(`/schedule/student/${getUser().id}`);
+
+    if (!response.schedule || response.schedule.length === 0) {
+      container.innerHTML = `<p>No schedule available</p>`;
+      return;
+    }
+    renderSchedule(response.schedule);
+  } catch (error) {
+    console.error("Error:", error);
+    container.innerHTML = `<p style="text-align:center;color:red">
+                Failed to load schedule
+             </p>`;
+  }
 }
 
 function renderSchedule(schedule) {
-    const container = document.getElementById("scheduleList");
-    container.innerHTML = "";
+  const container = document.getElementById("scheduleList");
+  container.innerHTML = "";
 
-    schedule.forEach(item => {
-        container.innerHTML += `
+  schedule.forEach((item) => {
+    const dayTime = `${item.day} ${item.time}`;
+    container.innerHTML += `
             <div class="schedule-card">
-                <div class="subject">${item.subject}</div>
-                <div class="time">⏰ ${item.time}</div>
-                <div class="room">📍 ${item.room}</div>
+                <div class="subject">${item.subject_name}</div>
+                <div class="time">⏰ ${dayTime}</div>
+                <div class="room">📍 ${item.room || "TBA"}</div>
+                <div class="teacher">👨‍🏫 ${item.teacher_name}</div>
             </div>
         `;
-    });
+  });
 }
 
 // Load on page open
@@ -56,21 +64,21 @@ loadStudentSchedule();
 ================================ */
 
 function goHome() {
-    window.location.href = "/page/student/studenthome.html";
+  window.location.href = "/page/student/studenthome.html";
 }
 
 function goSchedule() {
-    window.location.href = "/page/student/classstudent.html";
+  window.location.href = "/page/student/classstudent.html";
 }
 
 function goAttendance() {
-    window.location.href = "/page/student/studentattendence.html";
+  window.location.href = "/page/student/studentattendence.html";
 }
 
 function goInquiry() {
-    window.location.href = "/page/student/inquirystudent.html";
+  window.location.href = "/page/student/inquirystudent.html";
 }
 
 function goCalendar() {
-     window.location.href = "/page/student/calendarstudent.html";
+  window.location.href = "/page/student/calendarstudent.html";
 }

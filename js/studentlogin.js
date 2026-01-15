@@ -1,48 +1,45 @@
 document.addEventListener("DOMContentLoaded", () => {
+  const form = document.querySelector(".login-form");
 
-    const loginBtn = document.getElementById("sl-login");
+  if (form) {
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
 
-    loginBtn.addEventListener("click", () => {
-        const username = document.getElementById("sl-username").value.trim();
-        const password = document.getElementById("sl-password").value;
+      const username = document.getElementById("username").value.trim();
+      const password = document.getElementById("password").value;
 
-        if (!username || !password) {
-            alert("Please enter username and password");
-            return;
-        }
+      if (!username || !password) {
+        alert("Please enter username and password");
+        return;
+      }
 
-        /* ===============================
-           BACKEND INTEGRATION POINT
-        =============================== */
-
-        /*
-        fetch("/api/student/login", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ username, password })
-        })
-        .then(res => res.json())
-        .then(data => {
-            if (data.success) {
-                localStorage.setItem("token", data.token);
-                window.location.href = "/page/student/studenthome.html";
-            } else {
-                alert("Invalid credentials");
-            }
+      try {
+        // Call backend login API
+        const response = await apiCall("/auth/login", "POST", {
+          username,
+          password,
         });
-        */
 
-        // ✅ TEMP FRONTEND DEMO LOGIC (REMOVE LATER)
-        if (username === "student" && password === "1234") {
-            document.body.style.opacity = "0";
-            document.body.style.transition = "opacity 0.4s";
-
-            setTimeout(() => {
-                window.location.href = "/page/student/studenthome.html";
-            }, 400);
-        } else {
-            alert("Invalid username or password");
+        // Verify student role
+        if (response.user.role !== "student") {
+          alert("Please use admin login for admin accounts");
+          return;
         }
-    });
-});
 
+        // Store token and user info
+        setAuthToken(response.token);
+        setUser(response.user);
+
+        // Fade out and redirect
+        document.body.style.opacity = "0";
+        document.body.style.transition = "opacity 0.4s";
+
+        setTimeout(() => {
+          window.location.href = "/page/student/studenthome.html";
+        }, 400);
+      } catch (error) {
+        alert("Login failed: " + error.message);
+      }
+    });
+  }
+});

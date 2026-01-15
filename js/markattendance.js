@@ -1,107 +1,131 @@
-// FAKE API LINKS
-const SUBJECT_API = "https://your-backend.com/api/subjects";
-const STUDENTS_API = "https://your-backend.com/api/get-students";
-const SUBMIT_API  = "https://your-backend.com/api/submit-attendance";
+document.addEventListener("DOMContentLoaded", async () => {
+  try {
+    // Check authentication
+    const user = getUser();
+    if (!user || user.role !== "admin") {
+      window.location.href = "/mainlogin.html";
+      return;
+    }
 
-let attendanceData = {};  // { studentId: "P" or "A" }
+    await loadSubjects();
+  } catch (error) {
+    console.error("Error initializing:", error);
+  }
+});
+
+let attendanceData = {};
 
 // Load subjects from backend
-function loadSubjects() {
-    fetch(SUBJECT_API)
-        .then(res => res.json())
-        .then(data => {
-            let select = document.getElementById("subjectSelect");
-            select.innerHTML = `<option value="">Select Subject</option>`;
+async function loadSubjects() {
+  try {
+    const response = await apiCall("/schedule/subjects");
+    let select = document.getElementById("subjectSelect");
+    select.innerHTML = `<option value="">Select Subject</option>`;
 
-            data.subjects.forEach(sub => {
-                select.innerHTML += `<option value="${sub}">${sub}</option>`;
-            });
-        });
+    response.subjects.forEach((sub) => {
+      select.innerHTML += `<option value="${sub.id}|${sub.name}">${sub.name}</option>`;
+    });
+  } catch (error) {
+    console.error("Error loading subjects:", error);
+  }
 }
 
-loadSubjects();
-
 // Load students when subject is selected
-function loadStudents() {
-    let subject = document.getElementById("subjectSelect").value;
-    if (!subject) return;
+async function loadStudents() {
+  try {
+    let subjectSelect = document.getElementById("subjectSelect").value;
+    if (!subjectSelect) return;
 
-    document.getElementById("studentList").innerHTML =
-        `<p class="loading">Loading students...</p>`;
+    document.getElementById(
+      "studentList"
+    ).innerHTML = `<p class="loading">Loading students...</p>`;
 
-    fetch(STUDENTS_API + "?subject=" + subject)
-        .then(res => res.json())
-        .then(data => {
-            let list = document.getElementById("studentList");
-            list.innerHTML = "";
+    // Get all students from backend
+    const response = await apiCall("/admin/users?role=student");
+    let list = document.getElementById("studentList");
+    list.innerHTML = "";
 
-            data.students.forEach(std => {
-                attendanceData[std.id] = ""; // init
+    response.users.forEach((std) => {
+      attendanceData[std.id] = ""; // initialize
 
-                list.innerHTML += `
-                <div class="student-card">
-                    <span class="student-name">${std.name}</span>
-                    <div class="btn-group">
-                        <button class="present-btn" onclick="markPresent('${std.id}', this)">P</button>
-                        <button class="absent-btn" onclick="markAbsent('${std.id}', this)">A</button>
-                    </div>
-                </div>`;
-            });
-        });
+      list.innerHTML += `
+            <div class="student-card">
+                <span class="student-name">${std.name}</span>
+                <div class="btn-group">
+                    <button class="present-btn" onclick="markPresent('${std.id}', this)">P</button>
+                    <button class="absent-btn" onclick="markAbsent('${std.id}', this)">A</button>
+                </div>
+            </div>`;
+    });
+  } catch (error) {
+    console.error("Error loading students:", error);
+    document.getElementById(
+      "studentList"
+    ).innerHTML = `<p>Error loading students: ${error.message}</p>`;
+  }
 }
 
 // Mark Present
 function markPresent(id, btn) {
-    attendanceData[id] = "P";
+  attendanceData[id] = "P";
 
-    let parent = btn.parentNode;
-    parent.querySelector(".present-btn").classList.add("present-active");
-    parent.querySelector(".absent-btn").classList.remove("absent-active");
+  let parent = btn.parentNode;
+  parent.querySelector(".present-btn").classList.add("present-active");
+  parent.querySelector(".absent-btn").classList.remove("absent-active");
 }
 
 // Mark Absent
 function markAbsent(id, btn) {
-    attendanceData[id] = "A";
+  attendanceData[id] = "A";
 
-    let parent = btn.parentNode;
-    parent.querySelector(".absent-btn").classList.add("absent-active");
-    parent.querySelector(".present-btn").classList.remove("present-active");
+  let parent = btn.parentNode;
+  parent.querySelector(".absent-btn").classList.add("absent-active");
+  parent.querySelector(".present-btn").classList.remove("present-active");
 }
 
 // Submit Attendance
-function submitAttendance() {
-    let subject = document.getElementById("subjectSelect").value;
-    if (!subject) {
-        alert("Please select a subject!");
-        return;
+async function submitAttendance() {
+  try {
+    let subjectSelect = document.getElementById("subjectSelect").value;
+    if (!subjectSelect) {
+      alert("Please select a subject!");
+      return;
     }
+
+    const [subjectId] = subjectSelect.split("|");
+    const classId = 1; // Default class
 
     let formatted = [];
 
     for (let id in attendanceData) {
-        if (attendanceData[id] !== "") {
-            formatted.push({ studentId: id, status: attendanceData[id] });
-        }
+      if (attendanceData[id] !== "") {
+        formatted.push({
+          student_id: parseInt(id),
+          status: attendanceData[id],
+        });
+      }
     }
 
     if (formatted.length === 0) {
-        alert("Please mark attendance!");
-        return;
+      alert("Please mark attendance!");
+      return;
     }
 
-    fetch(SUBMIT_API, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-            subject: subject,
-            attendance: formatted
-        })
-    })
-    .then(res => res.json())
-    .then(() => {
-        alert("Attendance submitted successfully!");
-        history.back();
+    await apiCall("/attendance/submit", "POST", {
+      subject_id: parseInt(subjectId),
+      class_id: classId,
+      attendance: formatted,
     });
+
+    alert("Attendance submitted successfully!");
+
+    // Reset form
+    document.getElementById("studentList").innerHTML = "";
+    document.getElementById("subjectSelect").value = "";
+    attendanceData = {};
+  } catch (error) {
+    alert("Error: " + error.message);
+  }
 }
 /*-------path navigation---------*/
 
@@ -121,7 +145,5 @@ function goInquiry() {
 }
 
 function goCalendar() {
- window.location.href = "/page/admin/admincalender.html";
+  window.location.href = "/page/admin/admincalender.html";
 }
-
-

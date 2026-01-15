@@ -1,71 +1,68 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Class Schedule</title>
 
-    <link rel="stylesheet" href="/css/studentclass.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/framework7@7/framework7-bundle.min.css">
-    <link rel="stylesheet" href="/css/nav.css">
-</head>
+    <link rel="stylesheet" href="/css/studentclass.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/framework7@7/framework7-bundle.min.css"
+    />
+    <link rel="stylesheet" href="/css/nav.css" />
+  </head>
 
-<body>
-
-<div class="page">
-    <div class="page-content">
-
+  <body>
+    <div class="page">
+      <div class="page-content">
         <!-- BLUE HEADER -->
         <div class="top-header"></div>
 
         <!-- NAV BAR -->
         <div class="nav-bar">
-            <div class="menu-icon" onclick="history.back()">☰</div>
-            <h2>Class Schedule</h2>
-            <img src="/image.design/element/profile.png" class="profile">
+          <div class="menu-icon" onclick="history.back()">☰</div>
+          <h2>Class Schedule</h2>
+          <img src="/image.design/element/profile.png" class="profile" />
         </div>
 
         <!-- SCHEDULE BOX -->
         <div class="schedule-container" id="scheduleList">
-            <p class="loading-text">Loading schedule...</p>
+          <p class="loading-text">Loading schedule...</p>
         </div>
-
+      </div>
     </div>
-</div>
 
-<div class="footer-nav">
-    <div class="nav-item" onclick="goHome()">
-        <img src="/image.design/element/pngwing.com (2).png">
+    <div class="footer-nav">
+      <div class="nav-item" onclick="goHome()">
+        <img src="/image.design/element/pngwing.com (2).png" />
         <span>Home</span>
-    </div>
+      </div>
 
-    <div class="nav-item" onclick="goSchedule()">
-        <img src="/image.design/element/1 (1).png">
+      <div class="nav-item" onclick="goSchedule()">
+        <img src="/image.design/element/1 (1).png" />
         <span>Schedule</span>
-    </div>
+      </div>
 
-    <div class="nav-item" onclick="goAttendance()">
-        <img src="/image.design/element/profile check.png">
+      <div class="nav-item" onclick="goAttendance()">
+        <img src="/image.design/element/profile check.png" />
         <span>Attendance</span>
-    </div>
+      </div>
 
-    <div class="nav-item" onclick="goInquiry()">
-         <img src="/image.design/element/3png.png">
+      <div class="nav-item" onclick="goInquiry()">
+        <img src="/image.design/element/3png.png" />
         <span>Inquiry</span>
-    </div>
+      </div>
 
-    <div class="nav-item" onclick="goCalendar()">
-     
-        <img src="/image.design/element/2 (1).png">
-     
+      <div class="nav-item" onclick="goCalendar()">
+        <img src="/image.design/element/2 (1).png" />
+
         <span>Calendar</span>
+      </div>
     </div>
-</div>
 
-<script src="https://cdn.jsdelivr.net/npm/framework7@7/framework7-bundle.min.js"></script>
-<script src="/js/studentclass.js"></script>
-
-
-
-</body>
+    <script src="https://cdn.jsdelivr.net/npm/framework7@7/framework7-bundle.min.js"></script>
+    <script src="/js/config.js"></script>
+    <script src="/js/studentclass.js"></script>
+  </body>
 </html>

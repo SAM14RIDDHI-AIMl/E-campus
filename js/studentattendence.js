@@ -1,67 +1,74 @@
-document.addEventListener("DOMContentLoaded", () => {
-
-    // TEMP DATA (replace with backend API later)
-    const attendanceData = [
-        { subject: "Maths", present: 22, total: 30 },
-        { subject: "Physics", present: 18, total: 25 },
-        { subject: "Chemistry", present: 26, total: 28 },
-        { subject: "Computer", present: 30, total: 32 }
-    ];
-
-    // Choose bar color based on percentage
-    function getColor(p) {
-        if (p < 35) return "red";
-        if (p < 75) return "orange";
-        return "green";
+document.addEventListener("DOMContentLoaded", async () => {
+  try {
+    // Get current user
+    const user = getUser();
+    if (!user || user.role !== "student") {
+      window.location.href = "/mainlogin.html";
+      return;
     }
+
+    // Fetch attendance data from backend
+    const response = await apiCall(`/attendance/student/${user.id}`);
+    const attendanceData = response.attendance;
 
     const container = document.getElementById("attendance-list");
 
-    // Safety check
     if (!container) {
-        console.error("attendance-list element not found");
-        return;
+      console.error("attendance-list element not found");
+      return;
     }
 
     container.innerHTML = "";
 
-    attendanceData.forEach(sub => {
-        const percent = Math.round((sub.present / sub.total) * 100);
-        const color = getColor(percent);
+    if (attendanceData.length === 0) {
+      container.innerHTML = "<p>No attendance records found</p>";
+      return;
+    }
 
-        container.innerHTML += `
-            <div class="att-card">
-                <div class="att-top">
-                    <div class="att-subject">${sub.subject}</div>
-                    <div class="att-percent">${percent}%</div>
+    attendanceData.forEach((sub) => {
+      const percent = sub.percentage;
+      let color = percent < 35 ? "red" : percent < 75 ? "orange" : "green";
+
+      container.innerHTML += `
+                <div class="att-card">
+                    <div class="att-top">
+                        <div class="att-subject">${sub.subject}</div>
+                        <div class="att-percent">${percent}%</div>
+                    </div>
+
+                    <div class="att-bar-bg">
+                        <div class="att-bar-fill ${color}" style="width:${percent}%"></div>
+                    </div>
+
+                    <p class="att-info">
+                        ${sub.present}/${sub.total} classes attended
+                    </p>
                 </div>
-
-                <div class="att-bar-bg">
-                    <div class="att-bar-fill ${color}" style="width:${percent}%"></div>
-                </div>
-
-                <p class="att-info">
-                    ${sub.present}/${sub.total} classes attended
-                </p>
-            </div>
-        `;
+            `;
     });
-})
+  } catch (error) {
+    console.error("Error loading attendance:", error);
+    const container = document.getElementById("attendance-list");
+    if (container) {
+      container.innerHTML = `<p>Error loading attendance: ${error.message}</p>`;
+    }
+  }
+});
 
 function goHome() {
-    window.location.href = "/page/student/studenthome.html";
+  window.location.href = "/page/student/studenthome.html";
 }
 
 function goSchedule() {
-    window.location.href = "/page/student/classstudent.html";
+  window.location.href = "/page/student/classstudent.html";
 }
 
 function goAttendance() {
-    window.location.href = "/page/student/studentattendence.html";
+  window.location.href = "/page/student/studentattendence.html";
 }
 
 function goInquiry() {
-    window.location.href = "/page/student/inquirystudent.html";
+  window.location.href = "/page/student/inquirystudent.html";
 }
 
 function goCalendar() {

@@ -1,64 +1,62 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Attendance Overview</title>
 
     <!-- CSS -->
-    <link rel="stylesheet" href="/css/nav.css">
-    <link rel="stylesheet" href="/css/home.css">
-    <link rel="stylesheet" href="/css/student.css">
-</head>
+    <link rel="stylesheet" href="/css/nav.css" />
+    <link rel="stylesheet" href="/css/home.css" />
+    <link rel="stylesheet" href="/css/student.css" />
+  </head>
 
-<body>
+  <body>
+    <!-- TOP HEADER -->
+    <div class="top-header"></div>
 
-<!-- TOP HEADER -->
-<div class="top-header"></div>
+    <!-- NAV BAR -->
+    <div class="nav-bar">
+      <div class="menu-icon">☰</div>
+      <h2>Attendance Overview</h2>
+      <img src="/image.design/element/profile.png" class="profile" />
+    </div>
 
-<!-- NAV BAR -->
-<div class="nav-bar">
-    <div class="menu-icon">☰</div>
-    <h2>Attendance Overview</h2>
-    <img src="/image.design/element/profile.png" class="profile">
-</div>
+    <!-- ATTENDANCE LIST -->
+    <div id="attendance-list" class="page-content">
+      <p class="loading-text">Loading attendance...</p>
+    </div>
 
-<!-- ATTENDANCE LIST -->
-<div id="attendance-list" class="page-content">
-    <p class="loading-text">Loading attendance...</p>
-</div>
-
-<!-- FOOTER NAV -->
-<div class="footer-nav">
-    <div class="nav-item" onclick="goHome()">
-        <img src="/image.design/element/pngwing.com (2).png">
+    <!-- FOOTER NAV -->
+    <div class="footer-nav">
+      <div class="nav-item" onclick="goHome()">
+        <img src="/image.design/element/pngwing.com (2).png" />
         <span>Home</span>
-    </div>
+      </div>
 
-    <div class="nav-item" onclick="goSchedule()">
-        <img src="/image.design/element/1 (1).png">
+      <div class="nav-item" onclick="goSchedule()">
+        <img src="/image.design/element/1 (1).png" />
         <span>Schedule</span>
-    </div>
+      </div>
 
-    <div class="nav-item" onclick="goAttendance()">
-        <img src="/image.design/element/profile check.png">
+      <div class="nav-item" onclick="goAttendance()">
+        <img src="/image.design/element/profile check.png" />
         <span>Attendance</span>
-    </div>
+      </div>
 
-    <div class="nav-item" onclick="goInquiry()">
-        <img src="/image.design/element/3png.png">
+      <div class="nav-item" onclick="goInquiry()">
+        <img src="/image.design/element/3png.png" />
         <span>Inquiry</span>
-    </div>
+      </div>
 
-    <div class="nav-item" onclick="goCalendar()">
-        <img src="/image.design/element/2 (1).png">
+      <div class="nav-item" onclick="goCalendar()">
+        <img src="/image.design/element/2 (1).png" />
         <span>Calendar</span>
+      </div>
     </div>
-</div>
 
-<!-- JS -->
-<script src="/js/studentattendence.js"></script>
-
-
-</body>
+    <!-- JS -->
+    <script src="/js/config.js"></script>
+    <script src="/js/studentattendence.js"></script>
+  </body>
 </html>

@@ -1,56 +1,48 @@
-function loadUsers() {
-    return JSON.parse(localStorage.getItem("users") || "[]");
-}
-
-function saveUsers(users) {
-    localStorage.setItem("users", JSON.stringify(users));
-}
-
-function getLoggedIn() {
-    return JSON.parse(localStorage.getItem("loggedInUser"));
-}
+/* ================================
+   CHANGE PASSWORD
+================================ */
 
 document.addEventListener("DOMContentLoaded", () => {
-    const btn = document.getElementById("np-send");
-    if (!btn) return;
+  const btn = document.getElementById("np-send");
+  if (!btn) return;
 
-    btn.onclick = () => {
-        const pass = document.getElementById("np-pass").value;
-        const confirm = document.getElementById("np-confirm").value;
-
-        if (!pass || !confirm) {
-            alert("Please fill all fields");
-            return;
-        }
-
-        if (pass !== confirm) {
-            alert("Passwords do not match");
-            return;
-        }
-
-        const user = getLoggedIn();
-        if (!user) {
-            alert("Session expired. Please login again.");
-            window.location.href = "/page/admin/adminlogin.html";
-            return;
-        }
-
-        const users = loadUsers();
-        const index = users.findIndex(
-            u => u.name === user.name && u.role === user.role
-        );
-
-        if (index === -1) {
-            alert("User not found");
-            return;
-        }
-
-        users[index].password = pass;
-        saveUsers(users);
-
-        alert("Password updated successfully");
-
-        // Redirect to login
-        window.location.href = "/page/admin/adminlogin.html";
-    };
+  btn.onclick = changePassword;
 });
+
+async function changePassword() {
+  const oldPass = document.getElementById("np-old")?.value || "";
+  const newPass = document.getElementById("np-pass").value;
+  const confirm = document.getElementById("np-confirm").value;
+
+  if (!newPass || !confirm) {
+    alert("Please fill all fields");
+    return;
+  }
+
+  if (newPass !== confirm) {
+    alert("Passwords do not match");
+    return;
+  }
+
+  try {
+    const user = getUser();
+    if (!user) {
+      alert("Session expired. Please login again.");
+      window.location.href = "/mainlogin.html";
+      return;
+    }
+
+    await apiCall("/auth/change-password", "POST", {
+      old_password: oldPass,
+      new_password: newPass,
+    });
+
+    alert("Password updated successfully");
+    window.location.href = "/mainlogin.html";
+  } catch (error) {
+    console.error("Error:", error);
+    alert(
+      "Failed to change password: " + (error.message || "Please try again")
+    );
+  }
+}
